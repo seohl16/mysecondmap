@@ -31,11 +31,16 @@ const getClickHandler = (i) => () => {
 	const infowindow = infowindowList[i];
 	if (infowindow.getMap()){
 		infowindow.close();
-	}else {
+	} else {
 		infowindow.open(map, marker);
 	}
-}
+};
 // function getClickHandler(i) { return function () {}}
+
+const getClickMap = (i) => () => {
+	const infowindow = infowindowList[i];
+	infowindow.close();
+}
 
 for (let i in data){
 	const target = data[i];
@@ -69,5 +74,6 @@ for (let i in data){
 }
 
 for (let i = 0, ii = markerList.length; i < ii; i++){
+	naver.maps.Event.addListener(map, "click", getClickMap(i));
 	naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
 } 
