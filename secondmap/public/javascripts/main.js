@@ -20,7 +20,7 @@ const data = [
 		place_url: "http://place.map.kakao.com/1818548732",
 		road_address_name: "서울 강남구 테헤란로 231",
 		lat: 37.50288207510758,
-		lng: 127.04135620138392,
+		lng: 127.04135620138392, 
 	}
 ];
 
