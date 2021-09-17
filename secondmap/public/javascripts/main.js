@@ -26,6 +26,17 @@ const data = [
 let markerList = [];
 let infowindowList = [];
 
+const getClickHandler = (i) => () => {
+	const marker = markerList[i];
+	const infowindow = infowindowList[i];
+	if (infowindow.getMap()){
+		infowindow.close();
+	}else {
+		infowindow.open(map, marker);
+	}
+}
+// function getClickHandler(i) { return function () {}}
+
 for (let i in data){
 	const target = data[i];
 	const latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -41,8 +52,8 @@ for (let i in data){
 
 	const content = `
 		<div class="infowindow_wrap">
-			<div class="infowindow_name>${target.place_name}</div>
-			<div class="infowindow_address>${target.road_address_name}</div>
+			<div class="infowindow_name">${target.place_name}</div>
+			<div class="infowindow_address">${target.road_address_name}</div>
 		</div>
 	`;
 
@@ -56,3 +67,7 @@ for (let i in data){
 	markerList.push(marker);
 	infowindowList.push(infowindow);
 }
+
+for (let i = 0, ii = markerList.length; i < ii; i++){
+	naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+} 
