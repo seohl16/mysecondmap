@@ -8,6 +8,10 @@ a {
   color: #00B7FF;
 }
 
+#map:focus {
+  outline : none;
+}
+
 ul {
   list-style-type:none;
   margin : 0px;
