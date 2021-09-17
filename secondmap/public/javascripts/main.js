@@ -23,6 +23,8 @@ const data = [
 		lng: 127.04135620138392, 
 	}
 ];
+let markerList = [];
+let infowindowList = [];
 
 for (let i in data){
 	const target = data[i];
@@ -32,8 +34,25 @@ for (let i in data){
 		map:map, 
 		position : latlng,
 		icon : {
-			content : `<div class='marker'></div>`
-		}
+			content : `<div class='marker'></div>`, 
+			archor : new naver.maps.Point(7.5, 7.5), 
+		},
 	});
-	
+
+	const content = `
+		<div class="infowindow_wrap">
+			<div class="infowindow_name>${target.place_name}</div>
+			<div class="infowindow_address>${target.road_address_name}</div>
+		</div>
+	`;
+
+	const infowindow = new naver.maps.InfoWindow({
+		content:content, 
+		backgroundColor : "#00ff0000", 
+		borderColor : "#00ff0000", 
+		anchorSize : new naver.maps.Size(0,0), 
+	});
+
+	markerList.push(marker);
+	infowindowList.push(infowindow);
 }
