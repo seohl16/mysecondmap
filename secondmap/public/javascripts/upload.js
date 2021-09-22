@@ -36,7 +36,9 @@ function placesSearchCB(data, status, pagination) {
 function displayPlaces(data) {
 	let listEl = document.getElementById("placesList");
 	let bounds = new daum.maps.LatLngBounds(); // 해당 영역을 보여주는 함수 이후 사용 예정 행정구역 처럼 
-	
+	removeAllChildNodes(listEl);
+	removeMarker();
+		
 	for (let i = 0; i < data.length; i++)  {
 		let lat = data[i].y;
 		let lng = data[i].x;
@@ -93,4 +95,17 @@ function displayInfowindow(marker, place_name, address_name, lat, lng) {
 	map.panTo(marker, getPosition());
 	infowindow.setContent(content);
 	infowindow.open(map,marker);
+}
+
+function removeAllChildNodes(el) {
+	while (el.hasChildNodes()) {
+		el.removeChild(el.lastChild);
+	}
+}
+
+function removeMarker() {
+	for (let i = 0; i < markerList.length; i++) {
+		markerList[i].setMap(null);
+	}
+	markerList = [];
 }
