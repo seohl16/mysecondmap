@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const locationModel = require("../model/location");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,20 +11,42 @@ router.get('/upload', (req, res, next)=> {
   res.render('upload');
 });
 
-router.get('/test', (req, res, next) => {
-  console.log("테스트 완료");
-  res.json({
-    message: "response 완료!!",
-  });
-});
+// router.get('/test', (req, res, next) => {
+//   console.log("테스트 완료");
+//   res.json({
+//     message: "response 완료!!",
+//   });
+// });
 
-router.post('/test2', (req, res, next) => {
-  const {test, test2} = req.body;
-  console.log(test);
-  console.log(test2);
-  res.json({
-    message: "post 완료!!",
-  });
+// router.post('/test2', (req, res, next) => {
+//   const {test, test2} = req.body;
+//   console.log(test);
+//   console.log(test2);
+//   res.json({
+//     message: "post 완료!!",
+//   });
+// });
+
+router.post("/location", (req, res, next) => {
+  const { title, address, lat, lng} = req.body;
+  let location = new locationModel();
+  location.title = title;
+  location.address = address;
+  location.lat = lat;
+  location.lng = lng;
+
+  //몽고디비에 저장 
+  location.save().then(result => {
+    console.log(result);
+    res.json({
+      message:"success",
+    });
+  }).catch(error => {
+    console.log(error);
+    res.json({
+      message:"error",
+    });
+  })
 });
 
 module.exports = router;
