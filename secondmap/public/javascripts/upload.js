@@ -38,7 +38,7 @@ function displayPlaces(data) {
 	let bounds = new daum.maps.LatLngBounds(); // 해당 영역을 보여주는 함수 이후 사용 예정 행정구역 처럼 
 	removeAllChildNodes(listEl);
 	removeMarker();
-		
+
 	for (let i = 0; i < data.length; i++)  {
 		let lat = data[i].y;
 		let lng = data[i].x;
@@ -89,10 +89,10 @@ function displayInfowindow(marker, place_name, address_name, lat, lng) {
 	<div style="padding:25px;">
 	${place_name} <br> 
 	${address_name} <br>
-	<button>등록</button>
+	<button onClick="onSubmit('${place_name}','${address_name}',${lat},${lng});">등록</button>
 	</div>
 	`;
-	map.panTo(marker, getPosition());
+	// map.panTo(marker, getPosition());
 	infowindow.setContent(content);
 	infowindow.open(map,marker);
 }
@@ -108,4 +108,18 @@ function removeMarker() {
 		markerList[i].setMap(null);
 	}
 	markerList = [];
+}
+
+function onSubmit(title, address, lat, lng) {
+	$.ajax({
+		url:"/location",
+		data:{title, address, lat, lng}, 
+		type:"POST",
+	}).done((response) => {
+		console.log("data request successed");
+		alert("성공");
+	}).fail((error) => {
+		console.log("데이터 요청 실패");
+		alert("실패");
+	})
 }
