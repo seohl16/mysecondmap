@@ -81,7 +81,7 @@ li a:hover:not(.active) {
 	margin : 3px 0;
 }
 
-#placeList .item {
+#placesList .item {
 	position : relative;
 	border-bottom:1px solid #888;
 	overflow : hideen;
@@ -90,18 +90,18 @@ li a:hover:not(.active) {
 
 }
 
-#placeList .item span {
+#placesList .item span {
 	display:block;
 	margin-top : 4px;
 }
 
-#placeList .item .info {
+#placesList .item .info {
 	text-overflow : ellipsis;
 	overflow : hidden;
 	white-space : nowrap;
 	padding : 20px;
 }
 
-#placeList .item .info_title {
+#placesList .item .info_title {
 	font-weight : bolder;
 }
